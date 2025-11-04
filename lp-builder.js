@@ -1,5 +1,5 @@
 /* 
- * AP LP Builder v9.1 — FIXED & ENHANCED
+ * AP LP Builder v9.1 â€” FIXED & ENHANCED
  * Autophage.ai | 2025-11-03
  * 
  * File name: lp-builder.js
@@ -262,7 +262,7 @@
   toggleModeBtn?.addEventListener('click', () => {
     const next = root.classList.contains('mode-light') ? 'dark' : 'light';
     applyMode(next);
-    toast(`${next === 'light' ? '☀️' : '🌙'} ${next.charAt(0).toUpperCase() + next.slice(1)} mode`);
+    toast(`${next === 'light' ? 'â˜€ï¸' : 'ðŸŒ™'} ${next.charAt(0).toUpperCase() + next.slice(1)} mode`);
   });
   
   // ==================== MOBILE PREVIEW ====================
@@ -270,7 +270,7 @@
   mobilePreviewBtn?.addEventListener('click', () => {
     root.classList.toggle('mobile-preview');
     const isPreview = root.classList.contains('mobile-preview');
-    toast(isPreview ? '📱 Mobile Preview ON' : '🖥️ Desktop View');
+    toast(isPreview ? 'ðŸ“± Mobile Preview ON' : 'ðŸ–¥ï¸ Desktop View');
   });
   
   // ==================== CHARACTER COUNTERS ====================
@@ -297,7 +297,7 @@
   
   const COPY_EXAMPLES = {
     hero_headline: "GET 50+ QUALIFIED B2B LEADS MONTHLY",
-    hero_sub: "Help B2B SaaS companies book 3-5 demos per week through AI-powered outreach—no cold calling, no giant sales team.",
+    hero_sub: "Help B2B SaaS companies book 3-5 demos per week through AI-powered outreachâ€”no cold calling, no giant sales team.",
     q_who: "B2B SaaS founders doing $500K-$3M ARR",
     q_result: "50-80 qualified meetings per month",
     q_time: "in first 45 days",
@@ -377,7 +377,7 @@
       target.innerText = example;
       saveEdit(currentHintField, example);
       updateCharCounters();
-      toast('✨ Example loaded');
+      toast('âœ¨ Example loaded');
       hintTooltip.classList.remove('visible');
     }
   });
@@ -397,7 +397,7 @@
     logoText.style.display = 'none';
     localStorage.setItem('ap_logo', uri);
     showSaved();
-    toast('✓ Logo updated');
+    toast('âœ“ Logo updated');
   }
   
   const sLogo = localStorage.getItem('ap_logo');
@@ -424,7 +424,7 @@
     if(!url) return;
     if(videoIframe) { videoIframe.src = url; }
     localStorage.setItem('ap_vsl', url);
-    toast('✓ Video set');
+    toast('âœ“ Video set');
   });
   
   videoUploadBtn?.addEventListener('click', () => videoUploadInput?.click());
@@ -439,7 +439,7 @@
         videoIframe.style.display = 'none';
       }
       localStorage.setItem('ap_vsl_upload', e.target.result);
-      toast('✓ Video uploaded');
+      toast('âœ“ Video uploaded');
     };
     r.readAsDataURL(f);
   });
@@ -630,7 +630,7 @@
     
     localStorage.setItem('ap_section_' + id, String(!isVisible));
     renderSectionList();
-    toast(`${!isVisible ? '👁️ Shown' : '🚫 Hidden'}: ${sections.find(s => s.id === id)?.name}`);
+    toast(`${!isVisible ? 'ðŸ‘ï¸ Shown' : 'ðŸš« Hidden'}: ${sections.find(s => s.id === id)?.name}`);
   }
   
   // Restore section visibility
@@ -687,7 +687,7 @@
     localStorage.setItem('ap_versions', JSON.stringify(versions));
     renderVersionList();
     if(!label?.includes('Auto')) {
-      toast('💾 Version saved');
+      toast('ðŸ’¾ Version saved');
     }
   }
   
@@ -705,7 +705,7 @@
     });
     
     updateCharCounters();
-    toast('✓ Version restored');
+    toast('âœ“ Version restored');
     versionPanel?.classList.remove('visible');
   }
   
@@ -770,7 +770,7 @@
   const TEMPLATES = {
     saas: {
       hero_headline: 'SCALE YOUR B2B SALES WITH AI AGENTS',
-      hero_sub: 'Book 40-60 qualified demos monthly without hiring SDRs—AI handles prospecting, follow-ups, and scheduling while you focus on closing.',
+      hero_sub: 'Book 40-60 qualified demos monthly without hiring SDRsâ€”AI handles prospecting, follow-ups, and scheduling while you focus on closing.',
       q_who: 'B2B SaaS companies at $500K-$5M ARR',
       q_result: '40-60 qualified demos per month',
       q_time: 'within 45 days',
@@ -779,7 +779,7 @@
     },
     agency: {
       hero_headline: 'DONE-FOR-YOU LEAD GENERATION ENGINE',
-      hero_sub: 'Get 30-80 qualified leads monthly while we handle cold email, voice, SMS, and appointment setting—fully managed service.',
+      hero_sub: 'Get 30-80 qualified leads monthly while we handle cold email, voice, SMS, and appointment settingâ€”fully managed service.',
       q_who: 'Service agencies & consultancies',
       q_result: '30-80 qualified leads per month',
       q_time: 'in 30 days',
@@ -788,7 +788,7 @@
     },
     ecom: {
       hero_headline: 'TRIPLE YOUR SHOPIFY STORE REVENUE',
-      hero_sub: 'Convert more visitors into buyers with our proven funnel framework—average clients see 3.2x revenue increase in 60 days.',
+      hero_sub: 'Convert more visitors into buyers with our proven funnel frameworkâ€”average clients see 3.2x revenue increase in 60 days.',
       q_who: 'Shopify store owners doing $10K-$100K/mo',
       q_result: '2-3x revenue increase',
       q_time: 'within 60 days',
@@ -825,7 +825,7 @@
             }
           });
           updateCharCounters();
-          toast('✓ Template loaded');
+          toast('âœ“ Template loaded');
           templateDropdown?.classList.remove('visible');
         }
       }
@@ -920,7 +920,7 @@
 </html>`;
       
     downloadFile(html, 'landing-page.html', 'text/html');
-    toast('✓ HTML exported');
+    toast('âœ“ HTML exported');
   }
   
   function exportLiquidFiles() {
@@ -990,7 +990,7 @@
 {% endschema %}`;
     
     downloadFile(liquid, 'ap-landing-page.liquid', 'text/plain');
-    toast('✓ Liquid file exported');
+    toast('âœ“ Liquid file exported');
   }
   
   function exportReactComponent() {
@@ -1054,7 +1054,7 @@ export default function LandingPage() {
 }`;
     
     downloadFile(react, 'LandingPage.jsx', 'text/plain');
-    toast('✓ React component exported');
+    toast('âœ“ React component exported');
   }
   
   function exportJSON() {
@@ -1064,11 +1064,11 @@ export default function LandingPage() {
     a.href = URL.createObjectURL(blob);
     a.download = 'ap-lp-data.json';
     a.click();
-    toast('✓ JSON exported');
+    toast('âœ“ JSON exported');
   }
   
   function exportZIP() {
-    toast('⏳ Preparing ZIP file...');
+    toast('â³ Preparing ZIP file...');
     
     // We need to use JSZip library - since it's not available, we'll create a workaround
     // by creating individual downloads with instructions
@@ -1110,7 +1110,7 @@ FILES INCLUDED:
 4. data.json - Configuration backup
 
 INSTALLATION:
-1. Go to Shopify Admin → Themes → Edit Code
+1. Go to Shopify Admin â†’ Themes â†’ Edit Code
 2. Upload liquid file to /sections/
 3. Upload CSS and JS to /assets/
 4. Create new page template
@@ -1124,13 +1124,13 @@ For support: james@autophage.ai
     
     // Since we can't create a real ZIP in browser without a library,
     // let's download all files individually with a delay
-    toast('📦 Downloading files individually (no ZIP library available)...');
+    toast('ðŸ“¦ Downloading files individually (no ZIP library available)...');
     
     files.forEach((file, index) => {
       setTimeout(() => {
         downloadFile(file.content, file.name, 'text/plain');
         if(index === files.length - 1) {
-          toast('✓ All files exported!');
+          toast('âœ“ All files exported!');
         }
       }, index * 500);
     });
@@ -1219,10 +1219,10 @@ For support: james@autophage.ai
           }
           
           updateCharCounters();
-          toast('✓ Configuration imported');
+          toast('âœ“ Configuration imported');
         }
       } catch(err) {
-        toast('❌ Invalid JSON file');
+        toast('âŒ Invalid JSON file');
         console.error(err);
       }
     };
@@ -1264,7 +1264,7 @@ For support: james@autophage.ai
           body: JSON.stringify(payload)
         });
         if(r.ok) {
-          toast('✅ Submitted successfully');
+          toast('âœ… Submitted successfully');
           return;
         }
       }
@@ -1283,6 +1283,6 @@ For support: james@autophage.ai
   // Initial state capture for undo
   pushUndo();
   
-  toast('🚀 Builder v9.1 Ready', 2000);
+  toast('ðŸš€ Builder v9.1 Ready', 2000);
   
 })();
