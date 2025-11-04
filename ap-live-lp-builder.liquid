@@ -1,0 +1,617 @@
+{% comment %} 
+  AP LP Builder v9.1 — COMPLETE RESTORED VERSION
+  All sections restored + all features working
+{% endcomment %}
+
+<section id="ap-live-lp-builder" class="ap-wrap" data-version="v9.1">
+  {{ 'ap-builder.css' | asset_url | stylesheet_tag }}
+
+  <!-- SVG ICONS (all preserved) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="s-ai" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707m12.728 0-.707-.707M6.343 6.343l-.707-.707M8 12l1.5-3L12 7.5l3 1.5L16.5 12l-1.5 3L12 16.5l-3-1.5L8 12z"/>
+    </symbol>
+    <symbol id="s-brain" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9.5 2A2.5 2.5 0 0 0 7 4.5v.328A3.001 3.001 0 0 0 4.172 7.5H4.1A3.1 3.1 0 0 0 1 10.6v.8A3.1 3.1 0 0 0 4.1 14.5h.072A3.001 3.001 0 0 0 7 17.172V17.5A2.5 2.5 0 0 0 9.5 20h.25a.75.75 0 0 0 .75-.75v-5.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 0 .75.75h.25a2.5 2.5 0 0 0 2.5-2.5v-.328A3.001 3.001 0 0 0 19.828 14.5h.072a3.1 3.1 0 0 0 3.1-3.1v-.8a3.1 3.1 0 0 0-3.1-3.1h-.072A3.001 3.001 0 0 0 17 4.828V4.5A2.5 2.5 0 0 0 14.5 2h-5z"/>
+    </symbol>
+    <symbol id="s-lightning" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+    </symbol>
+    <symbol id="s-gears" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </symbol>
+    <symbol id="s-money" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 1v22M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/>
+    </symbol>
+    <symbol id="s-badge" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+    </symbol>
+    <symbol id="s-users" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75"/>
+    </symbol>
+    <symbol id="s-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="s-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/>
+    </symbol>
+    <symbol id="s-loop" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+    </symbol>
+    <symbol id="s-gift" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M20 12v10H4V12M2 7h20v5H2zM12 22V7m0 0H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zm0 0h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+    </symbol>
+    <symbol id="s-eye" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="s-eye-off" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22"/>
+    </symbol>
+    <symbol id="s-download" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5l5 5 5-5m-5 5V3"/>
+    </symbol>
+    <symbol id="s-code" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+    </symbol>
+    <symbol id="s-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01"/>
+    </symbol>
+    <symbol id="s-upload" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m14-7l-5-5-5 5m5-5v12"/>
+    </symbol>
+    <symbol id="s-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </symbol>
+    <symbol id="s-moon" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </symbol>
+    <symbol id="s-mobile" viewBox="0 0 24 24">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="12" y1="18" x2="12.01" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="s-sliders" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6m2-6h6m2 8h6"/>
+    </symbol>
+    <symbol id="s-history" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 3v5h5m4-1v5l4 2"/>
+    </symbol>
+    <symbol id="s-undo" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 7v6h6"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-7.7 4.3L3 13"/>
+    </symbol>
+    <symbol id="s-redo" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21 7v6h-6"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 7.7 4.3L21 13"/>
+    </symbol>
+    <symbol id="s-template" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="9" y1="21" x2="9" y2="9" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="s-save" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M17 21v-8H7v8M7 3v5h8"/>
+    </symbol>
+    <symbol id="s-x" viewBox="0 0 24 24">
+      <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div id="apProgressBar"></div>
+
+  <!-- COMPACT COUNTDOWN (normal text, small container) -->
+  <section class="ap-countdown-banner" id="apCountdownSection" data-section="countdown" data-visible="{{ section.settings.show_countdown }}">
+    <div class="ap-countdown-content">
+      <div class="ap-countdown-left">
+        <svg class="ap-countdown-icon" viewBox="0 0 24 24"><use href="#s-clock"/></svg>
+        <div>
+          <h3 class="ap-countdown-label editable" data-field="countdown_label">{{ section.settings.countdown_label | default: 'LIMITED TIME OFFER' }}</h3>
+          <p class="ap-countdown-sub editable" data-field="countdown_sub">{{ section.settings.countdown_sub | default: 'Lock in this price before it increases' }}</p>
+        </div>
+      </div>
+      <div class="ap-countdown-timer" id="apCountdownTimer">
+        <div class="ap-countdown-unit">
+          <span class="ap-countdown-value" id="apCountdownDays">00</span>
+          <span class="ap-countdown-unit-label">DAYS</span>
+        </div>
+        <div class="ap-countdown-unit">
+          <span class="ap-countdown-value" id="apCountdownHours">00</span>
+          <span class="ap-countdown-unit-label">HRS</span>
+        </div>
+        <div class="ap-countdown-unit">
+          <span class="ap-countdown-value" id="apCountdownMins">00</span>
+          <span class="ap-countdown-unit-label">MIN</span>
+        </div>
+        <div class="ap-countdown-unit">
+          <span class="ap-countdown-value" id="apCountdownSecs">00</span>
+          <span class="ap-countdown-unit-label">SEC</span>
+        </div>
+      </div>
+      <button class="ap-countdown-reset" id="apCountdownReset" type="button" title="Reset countdown">
+        <svg viewBox="0 0 24 24"><use href="#s-loop"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- HERO (PRESERVED) -->
+  <header class="ap-hero fade-up" id="apHero" data-section="hero" data-visible="true">
+    <div class="ap-hero-overlay">
+      <div class="ap-hero-grid"></div>
+      <div class="ap-hero-orb orb-a"></div>
+      <div class="ap-hero-orb orb-b"></div>
+      <div class="ap-hero-orb orb-c"></div>
+    </div>
+    <div class="ap-hero-inner">
+      <div class="ap-hero-left">
+        <button id="apLogoBtn" class="ap-logo-upload" type="button">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px"><use href="#s-upload"/></svg>
+          <span id="apLogoText">{{ section.settings.logo_text | default: 'YOUR LOGO' }}</span>
+          <img id="apLogoImg" alt="Logo" style="display:none" />
+          <input id="apLogoInput" type="file" accept="image/*" hidden />
+        </button>
+        <h1 class="ap-h1 editable" data-field="hero_headline">{{ section.settings.hero_headline | default: 'HORMOZI-STYLE FUNNEL BUILDER' }}</h1>
+        <p class="ap-sub editable" data-field="hero_sub">{{ section.settings.hero_sub | default: 'Craft high-converting offers fast' }}</p>
+        <div class="ap-quant">
+          <div class="ap-quant-row">
+            <span class="ap-quant-lbl">WHO</span>
+            <div class="editable ap-quant-cell" data-field="q_who">{{ section.settings.q_who | default: 'Service businesses / agencies' }}</div>
+          </div>
+          <div class="ap-quant-row">
+            <span class="ap-quant-lbl">RESULT</span>
+            <div class="editable ap-quant-cell" data-field="q_result">{{ section.settings.q_result | default: '30–80 qualified leads / month' }}</div>
+          </div>
+          <div class="ap-quant-row">
+            <span class="ap-quant-lbl">TIME</span>
+            <div class="editable ap-quant-cell" data-field="q_time">{{ section.settings.q_time | default: 'in 30 days' }}</div>
+          </div>
+          <div class="ap-quant-row">
+            <span class="ap-quant-lbl">WITHOUT</span>
+            <div class="editable ap-quant-cell" data-field="q_without">{{ section.settings.q_without | default: 'hiring SDRs or complex tools' }}</div>
+          </div>
+        </div>
+        <div class="ap-hero-cta">
+          <a class="ap-cta-btn ap-magnetic editable" data-field="hero_cta_label" href="{{ section.settings.cta_url | default: '#' }}" id="apHeroCtaLink">{{ section.settings.hero_cta_label | default: 'Book a Discovery Call' }}</a>
+        </div>
+        <div class="ap-scarcity-badge">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-lightning"/></svg>
+          <span class="editable" data-field="scarcity_text">{{ section.settings.scarcity_text | default: 'Only 3 spots left this month' }}</span>
+        </div>
+      </div>
+      <div class="ap-hero-right">
+        <section class="ap-vsl-card">
+          <div class="ap-vsl-head">
+            <h3 class="editable" data-field="vsl_h">{{ section.settings.vsl_h | default: '2–4 Minute VSL' }}</h3>
+            <p class="ap-muted editable" data-field="vsl_p">{{ section.settings.vsl_p | default: 'Explain outcome' }}</p>
+          </div>
+          <div class="ap-video">
+            <iframe id="apVideoIframe" src="{{ section.settings.video_url | default: 'https://www.youtube.com/embed/CNRiNz0YYlM' }}" allowfullscreen></iframe>
+            <video id="apVideoFile" controls style="display:none"></video>
+            <div class="ap-vsl-controls">
+              <input id="apVideoUrl" class="ap-input" placeholder="Paste YouTube/Vimeo URL" />
+              <button id="apVideoUseUrl" class="ap-btn" type="button">Use Link</button>
+              <input id="apVideoUpload" type="file" accept="video/*" hidden />
+              <button id="apVideoUploadBtn" class="ap-btn" type="button">Upload</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </header>
+
+  <div class="ap-divider"></div>
+
+  <!-- COST OF INACTION (ALL EDITABLE) -->
+  <section class="ap-section ap-coi fade-up" id="apCoiSection" data-section="coi" data-visible="{{ section.settings.show_coi }}">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="coi_title">{{ section.settings.coi_title | default: 'The Cost of Inaction' }}</h2>
+      <p class="ap-section-sub editable" data-field="coi_sub">{{ section.settings.coi_sub | default: 'Waiting is expensive' }}</p>
+    </header>
+    <div class="ap-coi-grid">
+      <article class="ap-coi-card" data-stagger="0">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-clock"/></svg></div>
+        <div class="ap-coi-body">
+          <h4 class="editable" data-field="coi_h1">{{ section.settings.coi_h1 | default: 'Missed Leads' }}</h4>
+          <p class="editable" data-field="coi_leads">{{ section.settings.coi_leads | default: '30–60 missed leads / month × $250 CPL' }}</p>
+        </div>
+      </article>
+      <article class="ap-coi-card" data-stagger="1">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-money"/></svg></div>
+        <div class="ap-coi-body">
+          <h4 class="editable" data-field="coi_h2">{{ section.settings.coi_h2 | default: 'Lost Revenue' }}</h4>
+          <p class="editable" data-field="coi_rev">{{ section.settings.coi_rev | default: '$15k–$60k potential pipeline not captured' }}</p>
+        </div>
+      </article>
+      <article class="ap-coi-card" data-stagger="2">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-loop"/></svg></div>
+        <div class="ap-coi-body">
+          <h4 class="editable" data-field="coi_h3">{{ section.settings.coi_h3 | default: 'Momentum' }}</h4>
+          <p class="editable" data-field="coi_mom">{{ section.settings.coi_mom | default: 'Slower learning → slower compounding' }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- WHO THIS IS FOR (RESTORED) -->
+  <section class="ap-section ap-value fade-up" id="apWhoSection" data-section="who" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="who_title">{{ section.settings.who_title | default: 'Who This Is For' }}</h2>
+      <p class="ap-section-sub editable" data-field="who_sub">{{ section.settings.who_sub | default: 'Define your ICP' }}</p>
+    </header>
+    <div class="ap-features">
+      <article class="ap-feature" data-stagger="0">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-users"/></svg></div>
+        <h4 class="editable" data-field="who_b1_h">{{ section.settings.who_b1_h | default: 'ICP Fit' }}</h4>
+        <p class="editable" data-field="who_b1">{{ section.settings.who_b1 | default: 'We tailor the offer to niche pains' }}</p>
+      </article>
+      <article class="ap-feature" data-stagger="1">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-target"/></svg></div>
+        <h4 class="editable" data-field="who_b2_h">{{ section.settings.who_b2_h | default: 'Friction Removal' }}</h4>
+        <p class="editable" data-field="who_b2">{{ section.settings.who_b2 | default: 'Proven funnel structure reduces buying friction' }}</p>
+      </article>
+      <article class="ap-feature" data-stagger="2">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-lightning"/></svg></div>
+        <h4 class="editable" data-field="who_b3_h">{{ section.settings.who_b3_h | default: 'Fast Start' }}</h4>
+        <p class="editable" data-field="who_b3">{{ section.settings.who_b3 | default: 'Minimal lift from your team to launch' }}</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- WHY IT WORKS (RESTORED) -->
+  <section class="ap-section ap-mechanism fade-up" id="apMechSection" data-section="mechanism" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="mech_title">{{ section.settings.mech_title | default: 'Why It Works' }}</h2>
+      <p class="ap-section-sub editable" data-field="mech_sub">{{ section.settings.mech_sub | default: 'Mechanism > magic' }}</p>
+    </header>
+    <div class="ap-mech-row">
+      <article class="ap-card" data-stagger="0">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-brain"/></svg></div>
+        <div>
+          <h4 class="editable" data-field="mech_b1_h">{{ section.settings.mech_b1_h | default: 'AI-Driven Enrichment' }}</h4>
+          <p class="editable" data-field="mech_b1">{{ section.settings.mech_b1 | default: 'Cleaner lists → better deliverability' }}</p>
+        </div>
+      </article>
+      <article class="ap-card" data-stagger="1">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-gears"/></svg></div>
+        <div>
+          <h4 class="editable" data-field="mech_b2_h">{{ section.settings.mech_b2_h | default: 'Automation Stack' }}</h4>
+          <p class="editable" data-field="mech_b2">{{ section.settings.mech_b2 | default: 'Email / voice / SMS orchestration compounding weekly' }}</p>
+        </div>
+      </article>
+      <article class="ap-card" data-stagger="2">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-loop"/></svg></div>
+        <div>
+          <h4 class="editable" data-field="mech_b3_h">{{ section.settings.mech_b3_h | default: 'Feedback Loop' }}</h4>
+          <p class="editable" data-field="mech_b3">{{ section.settings.mech_b3 | default: 'Test ↔ learn ↔ iterate for consistent lift' }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- HOW IT WORKS (RESTORED) -->
+  <section class="ap-section ap-process fade-up" id="apProcessSection" data-section="process" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="proc_title">{{ section.settings.proc_title | default: 'How It Works' }}</h2>
+      <p class="ap-section-sub editable" data-field="proc_sub">{{ section.settings.proc_sub | default: 'Simple 3-step path' }}</p>
+    </header>
+    <div class="ap-cards ap-cards-steps">
+      <article class="ap-card" data-stagger="0">
+        <div class="ap-badge">1</div>
+        <h4 class="editable" data-field="proc_1_h">{{ section.settings.proc_1_h | default: 'Clarify Offer & ICP' }}</h4>
+        <p class="editable" data-field="proc_1_p">{{ section.settings.proc_1_p | default: 'Outcome, proof, constraints, and pricing' }}</p>
+      </article>
+      <article class="ap-card" data-stagger="1">
+        <div class="ap-badge">2</div>
+        <h4 class="editable" data-field="proc_2_h">{{ section.settings.proc_2_h | default: 'Draft Copy & Structure' }}</h4>
+        <p class="editable" data-field="proc_2_p">{{ section.settings.proc_2_p | default: 'Value, proof, simplicity, and guarantee' }}</p>
+      </article>
+      <article class="ap-card" data-stagger="2">
+        <div class="ap-badge">3</div>
+        <h4 class="editable" data-field="proc_3_h">{{ section.settings.proc_3_h | default: 'Launch & Iterate' }}</h4>
+        <p class="editable" data-field="proc_3_p">{{ section.settings.proc_3_p | default: 'Test angles/CTAs and scale winners' }}</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- WHAT YOU GET (RESTORED) -->
+  <section class="ap-section ap-offer fade-up" id="apOfferSection" data-section="offer" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="offer_title">{{ section.settings.offer_title | default: 'What You Get' }}</h2>
+      <p class="ap-section-sub editable" data-field="offer_sub">{{ section.settings.offer_sub | default: 'Everything included, no fluff' }}</p>
+    </header>
+    <div class="ap-offer-grid">
+      <article class="ap-card ap-offer-card" data-stagger="0">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-gift"/></svg></div>
+        <h4 class="editable" data-field="offer_core_h">{{ section.settings.offer_core_h | default: 'Core Deliverable' }}</h4>
+        <p class="editable" data-field="offer_core_p">{{ section.settings.offer_core_p | default: 'Describe the core service in one clear sentence' }}</p>
+      </article>
+      <article class="ap-card ap-offer-card" data-stagger="1">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-target"/></svg></div>
+        <h4 class="editable" data-field="offer_bonus_h">{{ section.settings.offer_bonus_h | default: 'Bonuses' }}</h4>
+        <p class="editable" data-field="offer_bonus_p">{{ section.settings.offer_bonus_p | default: 'List the extras that increase perceived value' }}</p>
+      </article>
+      <article class="ap-card ap-offer-card" data-stagger="2">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-clock"/></svg></div>
+        <h4 class="editable" data-field="offer_time_h">{{ section.settings.offer_time_h | default: 'Timeline' }}</h4>
+        <p class="editable" data-field="offer_time_p">{{ section.settings.offer_time_p | default: 'Set realistic timing until first results' }}</p>
+      </article>
+      <article class="ap-card ap-offer-card" data-stagger="3">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-lightning"/></svg></div>
+        <h4 class="editable" data-field="offer_effort_h">{{ section.settings.offer_effort_h | default: 'Effort' }}</h4>
+        <p class="editable" data-field="offer_effort_p">{{ section.settings.offer_effort_p | default: 'What you do not need to do; we handle the rest' }}</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- VALUE STACK (RESTORED) -->
+  <section class="ap-section ap-value-stack fade-up" id="apValueSection" data-section="valuestack" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="vs_title">{{ section.settings.vs_title | default: 'Value Breakdown' }}</h2>
+      <p class="ap-section-sub editable" data-field="vs_sub">{{ section.settings.vs_sub | default: 'Why this is a rational yes' }}</p>
+    </header>
+    <div class="ap-vs-panel" id="apVsPanel">
+      <div class="ap-vs-table" id="apVsTable">
+        <div class="ap-vs-row">
+          <div class="editable" data-field="vs_i1">{{ section.settings.vs_i1 | default: 'Funnel Build (7-day)' }}</div>
+          <div class="editable" data-field="vs_v1">{{ section.settings.vs_v1 | default: '$2,500' }}</div>
+        </div>
+        <div class="ap-vs-row">
+          <div class="editable" data-field="vs_i2">{{ section.settings.vs_i2 | default: 'Copywriting System' }}</div>
+          <div class="editable" data-field="vs_v2">{{ section.settings.vs_v2 | default: '$1,000' }}</div>
+        </div>
+        <div class="ap-vs-row">
+          <div class="editable" data-field="vs_i3">{{ section.settings.vs_i3 | default: 'Launch Review & Tweaks' }}</div>
+          <div class="editable" data-field="vs_v3">{{ section.settings.vs_v3 | default: '$500' }}</div>
+        </div>
+      </div>
+      <div class="ap-vs-totals">
+        <div class="ap-vs-total-label">Total Value</div>
+        <div id="apVsTotal" class="ap-vs-total-num" data-target="4000">0</div>
+        <div class="ap-vs-save">
+          <span class="ap-vs-save-label">Today</span>
+          <span class="ap-vs-today editable" data-field="vs_today">{{ section.settings.vs_today | default: '$1,200' }}</span>
+          <span class="ap-vs-save-pill"><span id="apVsSavePct">Save 70%</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- ROI CALCULATOR (RESTORED) -->
+  <section class="ap-section ap-roi fade-up" id="apRoiSection" data-section="roi" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="roi_title">{{ section.settings.roi_title | default: 'ROI Snapshot' }}</h2>
+      <p class="ap-section-sub editable" data-field="roi_sub">{{ section.settings.roi_sub | default: 'Plug rough numbers to see payback' }}</p>
+    </header>
+    <div class="ap-roi-grid">
+      <div class="ap-roi-form">
+        <label>Avg Deal Size <input id="apRoiDeal" class="ap-input" type="number" value="3000"></label>
+        <label>Close Rate % <input id="apRoiClose" class="ap-input" type="number" value="20"></label>
+        <label>Leads / Month <input id="apRoiLeads" class="ap-input" type="number" value="40"></label>
+        <label>Monthly Cost <input id="apRoiCost" class="ap-input" type="number" value="1200"></label>
+      </div>
+      <div class="ap-roi-out">
+        <div class="ap-roi-kpi"><span class="k">Projected Revenue</span><span id="apRoiRev" class="v">$0</span></div>
+        <div class="ap-roi-kpi"><span class="k">Net / Month</span><span id="apRoiNet" class="v">$0</span></div>
+        <div class="ap-roi-kpi"><span class="k">Payback (days)</span><span id="apRoiPay" class="v">0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- PROOF (RESTORED) -->
+  <section class="ap-section ap-proof fade-up" id="apProofSection" data-section="proof" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="proof_title">{{ section.settings.proof_title | default: 'Proof It Works' }}</h2>
+    </header>
+    <div class="ap-case-carousel" id="apCases">
+      <article class="ap-case" data-stagger="0">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-target"/></svg></div>
+        <div class="ap-case-body">
+          <h4 class="editable" data-field="cs1_h">{{ section.settings.cs1_h | default: 'Agency A — 73 meetings in 30 days' }}</h4>
+          <p class="editable" data-field="cs1_p">{{ section.settings.cs1_p | default: 'ICP refinement + multichannel follow-ups improved conversion by 42% YoY' }}</p>
+        </div>
+      </article>
+      <article class="ap-case" data-stagger="1">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-gears"/></svg></div>
+        <div class="ap-case-body">
+          <h4 class="editable" data-field="cs2_h">{{ section.settings.cs2_h | default: 'SaaS B — CPL cut from $210 → $128' }}</h4>
+          <p class="editable" data-field="cs2_p">{{ section.settings.cs2_p | default: 'Better data cleanliness and offer angle testing over 14 days' }}</p>
+        </div>
+      </article>
+      <article class="ap-case" data-stagger="2">
+        <div class="ap-icon-box"><svg viewBox="0 0 24 24"><use href="#s-loop"/></svg></div>
+        <div class="ap-case-body">
+          <h4 class="editable" data-field="cs3_h">{{ section.settings.cs3_h | default: 'Consulting C — 3.9× pipeline in 45 days' }}</h4>
+          <p class="editable" data-field="cs3_p">{{ section.settings.cs3_p | default: 'Automated handoffs + clear guarantee increased reply quality' }}</p>
+        </div>
+      </article>
+    </div>
+    <div class="ap-testimonials" id="apTestimonials">
+      <blockquote class="ap-quote" data-stagger="0">
+        <p class="editable" data-field="t1_q">{{ section.settings.t1_q | default: 'Short, specific result with a number if possible' }}</p>
+        <cite class="editable" data-field="t1_cite">{{ section.settings.t1_cite | default: 'Name, Title @ Company' }}</cite>
+      </blockquote>
+      <blockquote class="ap-quote" data-stagger="1">
+        <p class="editable" data-field="t2_q">{{ section.settings.t2_q | default: 'Why this was easier/faster than expected' }}</p>
+        <cite class="editable" data-field="t2_cite">{{ section.settings.t2_cite | default: 'Name, Title @ Company' }}</cite>
+      </blockquote>
+      <blockquote class="ap-quote" data-stagger="2">
+        <p class="editable" data-field="t3_q">{{ section.settings.t3_q | default: 'Outcome achieved and time to result' }}</p>
+        <cite class="editable" data-field="t3_cite">{{ section.settings.t3_cite | default: 'Name, Title @ Company' }}</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- GUARANTEE (RESTORED) -->
+  <section class="ap-section ap-guarantee fade-up" id="apGuaranteeSection" data-section="guarantee" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="guarantee_title">{{ section.settings.guarantee_title | default: 'Our Guarantee' }}</h2>
+      <p class="ap-section-sub editable" data-field="g_p">{{ section.settings.g_p | default: 'State your risk reversal in one bold sentence' }}</p>
+    </header>
+    <div class="ap-guarantee-variants">
+      <article class="ap-card" data-stagger="0">
+        <h4 class="editable" data-field="g_var1_h">{{ section.settings.g_var1_h | default: 'Basic Guarantee' }}</h4>
+        <p class="editable" data-field="g_var1_p">{{ section.settings.g_var1_p | default: '30-day rebuild if underperforms' }}</p>
+      </article>
+      <article class="ap-card" data-stagger="1">
+        <h4 class="editable" data-field="g_var2_h">{{ section.settings.g_var2_h | default: 'Performance Guarantee' }}</h4>
+        <p class="editable" data-field="g_var2_p">{{ section.settings.g_var2_p | default: '10 booked calls or we rebuild free' }}</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="ap-divider"></div>
+
+  <!-- FINAL CTA (ALL EDITABLE) -->
+  <section class="ap-section ap-final-cta fade-up" id="apFinalCtaSection" data-section="finalcta" data-visible="true">
+    <header class="ap-section-head">
+      <h2 class="ap-section-title editable" data-field="final_cta_title">{{ section.settings.final_cta_title | default: 'Ready to See Your Draft?' }}</h2>
+      <p class="ap-section-sub editable" data-field="cta_p">{{ section.settings.cta_p | default: 'Book a review session. We will walk through your page and lock the offer' }}</p>
+    </header>
+    <div class="ap-final-actions">
+      <a id="apFinalCtaBtn" class="ap-cta-btn ap-magnetic editable" data-field="cta_label" href="{{ section.settings.cta_url | default: 'https://calendly.com/your-link' }}">{{ section.settings.cta_label | default: 'Book Discovery Call' }}</a>
+      <div class="ap-cta-url-editor">
+        <label for="apCtaUrlInput">CTA URL:</label>
+        <input id="apCtaUrlInput" class="ap-input" type="url" value="{{ section.settings.cta_url }}" placeholder="https://calendly.com/your-link" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="ap-section ap-footer fade-up" id="apFooterSection" data-section="footer" data-visible="true">
+    <p class="editable" data-field="foot_legal">{{ section.settings.foot_legal | default: '© ' }} {{ shop.name }}. All rights reserved.</p>
+    <p class="editable" data-field="foot_contact">{{ section.settings.foot_contact | default: 'Contact: hello@example.com' }}</p>
+  </footer>
+
+  <!-- CONTROL DOCK (ALL PRESERVED) -->
+  <div class="ap-controls" id="apControls">
+    <div class="ap-controls-left">
+      <span class="ap-editor-badge" id="apModeLabel">Dark</span>
+      <button class="ap-chip" id="apToggleMode" type="button" title="Toggle theme"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-sun"/></svg></button>
+      <button class="ap-chip" id="apMobilePreview" type="button" title="Mobile preview"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-mobile"/></svg></button>
+      <button class="ap-chip" id="apSectionManager" type="button" title="Section manager"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-sliders"/></svg></button>
+      <button class="ap-chip" id="apUndo" type="button" title="Undo (Ctrl+Z)" disabled><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-undo"/></svg></button>
+      <button class="ap-chip" id="apRedo" type="button" title="Redo (Ctrl+Y)" disabled><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-redo"/></svg></button>
+    </div>
+    <div class="ap-actions">
+      <div class="ap-autosave-indicator" id="apAutosaveIndicator">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px"><use href="#s-save"/></svg>
+        <span id="apAutosaveText">Saved</span>
+      </div>
+      <div class="ap-export-menu" id="apTemplateMenu">
+        <button class="ap-btn" id="apTemplateTrigger" type="button"><svg viewBox="0 0 24 24" style="width:16px;height:16px;margin-right:6px"><use href="#s-template"/></svg>Templates</button>
+        <div class="ap-export-dropdown" id="apTemplateDropdown">
+          <button class="ap-export-option" data-template="saas" type="button"><svg viewBox="0 0 24 24"><use href="#s-ai"/></svg><div><strong>B2B SaaS</strong><span>High-ticket software offer</span></div></button>
+          <button class="ap-export-option" data-template="agency" type="button"><svg viewBox="0 0 24 24"><use href="#s-users"/></svg><div><strong>Agency/DFY</strong><span>Done-for-you services</span></div></button>
+          <button class="ap-export-option" data-template="ecom" type="button"><svg viewBox="0 0 24 24"><use href="#s-gift"/></svg><div><strong>E-commerce</strong><span>Product-focused funnel</span></div></button>
+        </div>
+      </div>
+      <div class="ap-export-menu" id="apExportMenu">
+        <button class="ap-btn" id="apExportTrigger" type="button"><svg viewBox="0 0 24 24" style="width:16px;height:16px;margin-right:6px"><use href="#s-download"/></svg>Export</button>
+        <div class="ap-export-dropdown" id="apExportDropdown">
+          <button class="ap-export-option" data-format="html" type="button"><svg viewBox="0 0 24 24"><use href="#s-code"/></svg><div><strong>Standalone HTML</strong><span>Single file</span></div></button>
+          <button class="ap-export-option" data-format="liquid" type="button"><svg viewBox="0 0 24 24"><use href="#s-code"/></svg><div><strong>Shopify Liquid</strong><span>3 files</span></div></button>
+          <button class="ap-export-option" data-format="react" type="button"><svg viewBox="0 0 24 24"><use href="#s-code"/></svg><div><strong>React Component</strong><span>JSX file</span></div></button>
+          <button class="ap-export-option" data-format="json" type="button"><svg viewBox="0 0 24 24"><use href="#s-download"/></svg><div><strong>JSON Data</strong><span>All field values</span></div></button>
+          <button class="ap-export-option" data-format="zip" type="button"><svg viewBox="0 0 24 24"><use href="#s-download"/></svg><div><strong>Complete ZIP</strong><span>All files</span></div></button>
+        </div>
+      </div>
+      <button class="ap-btn" id="apImportJson" type="button" title="Import JSON"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-upload"/></svg></button>
+      <input type="file" id="apImportJsonInput" accept=".json" hidden />
+      <button class="ap-btn" id="apVersionHistory" type="button" title="Version history"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#s-history"/></svg></button>
+      <button class="ap-btn -primary" id="apSubmit" type="button">Submit for Review</button>
+      <span id="apSaved" class="ap-saved">Saved ✓</span>
+    </div>
+  </div>
+
+  <!-- PANELS (PRESERVED) -->
+  <div class="ap-panel ap-section-panel" id="apSectionPanel">
+    <div class="ap-panel-head">
+      <h3>Section Manager</h3>
+      <button class="ap-panel-close" id="apSectionPanelClose" type="button"><svg viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#s-x"/></svg></button>
+    </div>
+    <div class="ap-panel-body" id="apSectionList"></div>
+  </div>
+
+  <div class="ap-panel ap-version-panel" id="apVersionPanel">
+    <div class="ap-panel-head">
+      <h3>Version History</h3>
+      <button class="ap-panel-close" id="apVersionPanelClose" type="button"><svg viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#s-x"/></svg></button>
+    </div>
+    <div class="ap-panel-body" id="apVersionList">
+      <button class="ap-btn" id="apSaveVersion" type="button" style="width:100%;margin-bottom:16px"><svg viewBox="0 0 24 24" style="width:16px;height:16px;margin-right:6px"><use href="#s-save"/></svg>Save Current Version</button>
+      <div id="apVersionTimeline"></div>
+    </div>
+  </div>
+
+  <div class="ap-hint-tooltip" id="apHintTooltip">
+    <div class="ap-hint-content" id="apHintContent"></div>
+    <button class="ap-hint-example" id="apHintExample" type="button">Show Example</button>
+  </div>
+
+  <script src="{{ 'lp-builder.js' | asset_url }}" defer></script>
+
+  {% schema %}
+  {
+    "name": "AP LP Builder v9.1",
+    "tag": "section",
+    "settings": [
+      {"type": "header", "content": "Countdown"},
+      {"type": "checkbox", "id": "show_countdown", "label": "Show Countdown", "default": true},
+      {"type": "text", "id": "countdown_label", "label": "Label", "default": "LIMITED TIME OFFER"},
+      {"type": "text", "id": "countdown_sub", "label": "Subtitle", "default": "Lock in this price"},
+      {"type": "header", "content": "Hero"},
+      {"type": "text", "id": "logo_text", "label": "Logo Text", "default": "YOUR LOGO"},
+      {"type": "text", "id": "hero_headline", "label": "Headline", "default": "HORMOZI-STYLE FUNNEL BUILDER"},
+      {"type": "textarea", "id": "hero_sub", "label": "Subtitle", "default": "Craft high-converting offers fast"},
+      {"type": "text", "id": "q_who", "label": "WHO", "default": "Service businesses"},
+      {"type": "text", "id": "q_result", "label": "RESULT", "default": "30-80 qualified leads"},
+      {"type": "text", "id": "q_time", "label": "TIME", "default": "in 30 days"},
+      {"type": "text", "id": "q_without", "label": "WITHOUT", "default": "hiring SDRs"},
+      {"type": "text", "id": "hero_cta_label", "label": "CTA Label", "default": "Book a Discovery Call"},
+      {"type": "text", "id": "cta_url", "label": "CTA URL", "default": "https://calendly.com/your-link"},
+      {"type": "text", "id": "scarcity_text", "label": "Scarcity Text", "default": "Only 3 spots left"},
+      {"type": "text", "id": "vsl_h", "label": "Video Title", "default": "2-4 Minute VSL"},
+      {"type": "text", "id": "vsl_p", "label": "Video Description", "default": "Explain outcome"},
+      {"type": "text", "id": "video_url", "label": "Video URL", "default": "https://www.youtube.com/embed/CNRiNz0YYlM"},
+      {"type": "header", "content": "COI"},
+      {"type": "checkbox", "id": "show_coi", "label": "Show COI", "default": true},
+      {"type": "text", "id": "coi_title", "label": "Title", "default": "The Cost of Inaction"},
+      {"type": "textarea", "id": "coi_sub", "label": "Subtitle", "default": "Waiting is expensive"},
+      {"type": "text", "id": "coi_h1", "label": "Card 1 Title", "default": "Missed Leads"},
+      {"type": "text", "id": "coi_leads", "label": "Card 1 Text", "default": "30-60 missed leads"},
+      {"type": "text", "id": "coi_h2", "label": "Card 2 Title", "default": "Lost Revenue"},
+      {"type": "text", "id": "coi_rev", "label": "Card 2 Text", "default": "$15k-$60k pipeline"},
+      {"type": "text", "id": "coi_h3", "label": "Card 3 Title", "default": "Momentum"},
+      {"type": "text", "id": "coi_mom", "label": "Card 3 Text", "default": "Slower compounding"},
+      {"type": "header", "content": "Footer"},
+      {"type": "text", "id": "foot_legal", "label": "Copyright", "default": "© All rights reserved"},
+      {"type": "text", "id": "foot_contact", "label": "Contact", "default": "Contact: hello@example.com"}
+    ],
+    "presets": [{"name": "AP LP Builder v9.1 COMPLETE"}]
+  }
+  {% endschema %}
+</section>
